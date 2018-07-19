@@ -37,6 +37,7 @@ public class LibraryTest {
         testLibrary = new Library(testBookList, printStream, bufferedReader);
     }
 
+
     @Test
     @Ignore
     public void shouldPrintNothingWhenThereAreNoBooks() {
@@ -48,10 +49,12 @@ public class LibraryTest {
     @Test
     @Ignore
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        String title = "Book Title";
+        Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes"., 1959);
+        testLibrary.addBook(testBook);
+
         System.setOut(printStream);
         testLibrary.listBooks();
-        verify(printStream).println(title + "\n");
+        verify(printStream).println(testBook.title + " | " + testBook.author + " | " + testBook.pubDate);
     }
 
 

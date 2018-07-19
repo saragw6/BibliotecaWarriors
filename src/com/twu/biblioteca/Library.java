@@ -15,9 +15,13 @@ public class Library {
         this.bufferedReader = bufferedReader;
     }
 
+    public addBook(Book book){
+        bookList.add(book);
+    }
+
     public void listBooks(){
         for(int i = 0; i < bookList.size(); i++){
-            printDetails();
+            bookList.printDetails();
         }
     }
 }
