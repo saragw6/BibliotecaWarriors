@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
 
 
 public class LibraryTest {
-    private ArrayList testBookList;
+    private ArrayList<Book> testBookList;
     private Library testLibrary;
 
     private PrintStream printStream;

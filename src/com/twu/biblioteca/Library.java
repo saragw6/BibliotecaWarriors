@@ -5,11 +5,11 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class Library {
-    private ArrayList bookList;
+    private ArrayList<Book> bookList;
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
-    public Library(ArrayList bookList, PrintStream printStream, BufferedReader bufferedReader) {
+    public Library(ArrayList<Book> bookList, PrintStream printStream, BufferedReader bufferedReader) {
         this.bookList = bookList;
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
