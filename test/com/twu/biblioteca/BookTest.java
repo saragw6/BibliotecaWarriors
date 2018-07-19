@@ -48,6 +48,9 @@ public class BookTest {
 
     @Test
     public void bookShouldBeAvailableOrUnavailable(){
+        testBook.toggleAvail();
+        assertEquals(true, testBook.isAvailable());
+        testBook.toggleAvail();
         assertTrue(testBook.availability);
     }
 
