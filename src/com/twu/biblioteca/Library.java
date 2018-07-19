@@ -9,14 +9,15 @@ public class Library {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
-
-    public Library(ArrayList bookList, PrintStream printStream, BufferedReader bufferedReader){
+    public Library(ArrayList bookList, PrintStream printStream, BufferedReader bufferedReader) {
         this.bookList = bookList;
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
     }
 
     public void listBooks(){
-
+        for(int i = 0; i < bookList.size(); i++){
+            printDetails();
+        }
     }
 }

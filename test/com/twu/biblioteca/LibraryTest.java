@@ -12,8 +12,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 
-import static org.junit.Assert.assertTrue;
-
 
 public class LibraryTest {
     private ArrayList testBookList;
@@ -36,7 +34,7 @@ public class LibraryTest {
         testBookList = new ArrayList();
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
-        testLibrary = new Library();
+        testLibrary = new Library(testBookList, printStream, bufferedReader);
     }
 
     @Test
