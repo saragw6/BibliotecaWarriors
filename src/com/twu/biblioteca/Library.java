@@ -1,9 +1,22 @@
 package com.twu.biblioteca;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class Library {
-    ArrayList bookList = new ArrayList();
+    private ArrayList bookList;
+    private PrintStream printStream;
+    private BufferedReader bufferedReader;
 
-    //public ArrayList listBooks();
+
+    public Library(ArrayList bookList, PrintStream printStream, BufferedReader bufferedReader){
+        this.bookList = bookList;
+        this.printStream = printStream;
+        this.bufferedReader = bufferedReader;
+    }
+
+    public void listBooks(){
+
+    }
 }
