@@ -29,7 +29,6 @@ public class LibraryTest {
     }
 
     @Test
-    @Ignore
     public void setUp() throws Exception {
         testBookList = new ArrayList();
         printStream = mock(PrintStream.class);
@@ -39,7 +38,6 @@ public class LibraryTest {
 
 
     @Test
-    @Ignore
     public void shouldPrintNothingWhenThereAreNoBooks() {
         System.setOut(printStream);
         testLibrary.listBooks();
@@ -47,7 +45,6 @@ public class LibraryTest {
     }
 
     @Test
-    @Ignore
     public void shouldPrintBookTitleWhenThereIsOneBook() {
         Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes"., 1959);
         testLibrary.addBook(testBook);
@@ -59,12 +56,14 @@ public class LibraryTest {
 
 
     @Test
-    @Ignore
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
-        String title = "Book Title";
-        String title2 = "Book Title 2";
+        Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015);
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes"., 1959);
+        testLibrary.addBook(bookOne);
+        testLibrary.addBook(bookTwo);
+
         System.setOut(printStream);
         testLibrary.listBooks();
-        verify(printStream).println(title + "\n" + title2 + "\n");
-    }
+        verify(printStream).println(bookOne.title + " | " + bookOne.author + " | " + bookOne.pubDate);
+        verify(printStream).println(bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
 }
