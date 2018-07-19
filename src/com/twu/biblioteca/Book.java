@@ -21,4 +21,17 @@ public class Book {
     public void printDetails() {
         System.out.println(this.title + " | " + this.author + " | " + this.pubDate);
     }
+
+    public void toggleAvail() {
+        availability = !availability;
+
+    }
+
+    public boolean isAvailable() {
+        return availability;
+    }
+
+    public Object getID() {
+        return id;
+    }
 }

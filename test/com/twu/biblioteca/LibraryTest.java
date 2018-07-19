@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -66,4 +67,14 @@ public class LibraryTest {
         testLibrary.listBooks();
         verify(printStream).println(bookOne.title + " | " + bookOne.author + " | " + bookOne.pubDate);
         verify(printStream).println(bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
+        verify(printStream).println(title + "\n" + title2 + "\n");
+    }
+
+    @Test
+    public void correctBookCheckedOut() {
+        Book userBook = testLibrary.getBookList().get(0);
+        Book checkedoutBook = testLibrary.checkoutById(userBook.getID());
+        assertEquals(userBook.getID(), checkedoutBook.getID());
+
+    }
 }
