@@ -24,7 +24,9 @@ public class Library {
         if(bookList.isEmpty()) System.out.print("");
         else {
             for(int i = 0; i < bookList.size(); i++){
-                bookList.get(i).printDetails();
+                if (bookList.get(i).isAvailable()) {
+                    bookList.get(i).printDetails();
+                }
             }
         }
     }

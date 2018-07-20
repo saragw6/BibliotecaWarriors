@@ -88,7 +88,12 @@ public class LibraryTest {
     }
 
     @Test
-    public void doNotPrintUnavailableBooks() {
-        
+    public void printOnlyAvailBooks() {
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
+        testLibrary.addBook(bookOne);
+        Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
+        testLibrary.addBook(bookTwo);
+        testLibrary.listBooks();
+        verify(printStream).println(bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
     }
 }
