@@ -28,11 +28,11 @@ public class LibraryTest {
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         testLibrary = new Library(testBookList, printStream, bufferedReader);
+        System.setOut(printStream);
     }
     
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
-        System.setOut(printStream);
         testLibrary.listBooks();
         verify(printStream).print("");
     }
@@ -42,8 +42,8 @@ public class LibraryTest {
         Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
 
         testLibrary.addBook(testBook);
-        System.setOut(printStream);
         testLibrary.listBooks();
+
         verify(printStream).println(testBook.title + " | " + testBook.author + " | " + testBook.pubDate);
     }
 
@@ -52,10 +52,10 @@ public class LibraryTest {
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
         Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
         Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+
         testLibrary.addBook(bookOne);
         testLibrary.addBook(bookTwo);
 
-        System.setOut(printStream);
         testLibrary.listBooks();
         verify(printStream).println(bookOne.title + " | " + bookOne.author + " | " + bookOne.pubDate);
         verify(printStream).println(bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
