@@ -21,16 +21,7 @@ public class LibraryTest {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
-
-    @Test
-    @Ignore
-    public void shouldShowBookDetails() {
-        // implement me
-
-    }
-
-    @Test
-    public void setUp() throws Exception {
+    public void setUp() {
         testBookList = new ArrayList<Book>();
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
@@ -39,26 +30,18 @@ public class LibraryTest {
     
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
-        testBookList = new ArrayList<Book>();
-        printStream = mock(PrintStream.class);
-        bufferedReader = mock(BufferedReader.class);
-        testLibrary = new Library(testBookList, printStream, bufferedReader);
+        setUp();
         System.setOut(printStream);
         testLibrary.listBooks();
-        verify(printStream).println("");
+        verify(printStream).print("");
     }
 
     @Test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        testBookList = new ArrayList<Book>();
-        printStream = mock(PrintStream.class);
-        bufferedReader = mock(BufferedReader.class);
-
+        setUp();
         Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
-        testLibrary = new Library(testBookList, printStream, bufferedReader);
 
         testLibrary.addBook(testBook);
-
         System.setOut(printStream);
         testLibrary.listBooks();
         verify(printStream).println(testBook.title + " | " + testBook.author + " | " + testBook.pubDate);
@@ -67,10 +50,8 @@ public class LibraryTest {
 
     @Test
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
-        testBookList = new ArrayList<Book>();
-        printStream = mock(PrintStream.class);
-        bufferedReader = mock(BufferedReader.class);
-        testLibrary = new Library(testBookList, printStream, bufferedReader);
+        setUp();
+
         Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
         Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);

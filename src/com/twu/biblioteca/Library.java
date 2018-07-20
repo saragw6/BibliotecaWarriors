@@ -20,8 +20,12 @@ public class Library {
     }
 
     public void listBooks(){
-        for(int i = 0; i < bookList.size(); i++){
-            bookList.get(i).printDetails();
+        if(bookList.isEmpty()) System.out.print("");
+        else {
+            for(int i = 0; i < bookList.size(); i++){
+                bookList.get(i).printDetails();
+            }
         }
+
     }
 }
