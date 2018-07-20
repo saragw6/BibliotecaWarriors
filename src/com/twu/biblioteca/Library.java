@@ -21,7 +21,7 @@ public class Library {
 
     public void listBooks(){
         for(int i = 0; i < bookList.size(); i++){
-            bookList.printDetails();
+            bookList[i].printDetails();
         }
     }
 }
