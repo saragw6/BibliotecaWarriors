@@ -9,13 +9,19 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
-
     public static void main(String[] args) {
+
+        welcomeMessage();
+
         Scanner userInput = new Scanner(System.in);
         PrintStream stream = new PrintStream(System.out);
         Library library = new Library(new ArrayList<Book>(), stream, new BufferedReader(new InputStreamReader(System.in)));
         mainMenu(library, userInput, stream);
 
+    }
+
+    public static void welcomeMessage(){
+        System.out.println("Welcome to Biblioteca!");
     }
 
     private static void mainMenu(Library library, Scanner scan, PrintStream ps){
