@@ -9,7 +9,7 @@ public class Library {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
-    public Library(ArrayList<Book> bookList, PrintStream printStream, BufferedReader bufferedReader) {
+    public Library(ArrayList<Book> bookList, PrintStream printStream, BufferedReader bufferedRead) {
         this.bookList = bookList;
         this.printStream = printStream;
         this.bufferedReader = bufferedReader;
