@@ -36,6 +36,15 @@ public class BibliotecaAppTest {
 
     }
 
+    @Test(expected = NoSuchElementException.class)
+    public void invalidMenuOptions(){
+        ByteArrayInputStream input = new ByteArrayInputStream("INVALID".getBytes());
+        System.setIn(input);
+
+        app.main(null);
+        verify(printStream).println("Invalid Menu Option");
+    }
+
     @Test
     public void quitTest(){
         ByteArrayInputStream input2 = new ByteArrayInputStream("quit".getBytes());

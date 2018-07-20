@@ -39,7 +39,7 @@ public class BibliotecaApp {
                 running = false;
             }
             else{
-                ps.println("Invaild Menu Option");
+                ps.println("Invalid Menu Option");
             }
         }
         return running;
