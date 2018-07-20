@@ -7,13 +7,11 @@ import java.util.ArrayList;
 
 public class Library {
     private ArrayList<Book> bookList;
-    private PrintStream printStream;
-    private BufferedReader bufferedReader;
+    private Printer printer;
 
     public Library(ArrayList<Book> bookList, PrintStream printStream, BufferedReader bufferedRead) {
         this.bookList = bookList;
-        this.printStream = printStream;
-        this.bufferedReader = bufferedReader;
+        this.printer = new Printer(printStream);
     }
 
     public void addBook(Book book){
@@ -25,7 +23,7 @@ public class Library {
         else {
             for(int i = 0; i < bookList.size(); i++){
                 if (bookList.get(i).isAvailable()) {
-                    bookList.get(i).printDetails();
+                    printer.printBookDetails(bookList.get(i));
                 }
             }
         }
@@ -38,35 +36,22 @@ public class Library {
     public void checkoutById(int id) {
         for (Book book : this.bookList) {
             if (book.getID() == id && book.isAvailable()) {
-                printMsg(true, true);
-                return;
+                printer.printCheckoutMsg(true);
             }
         }
-        printMsg(false, true);
+        printer.printCheckoutMsg(false);
 
     }
 
     public void returnById(int id){
         for (Book book : this.bookList) {
             if (book.getID() == id && !book.isAvailable()) {
-                printMsg(true, false);
+                printer.printReturnMsg(true);
             }
         }
-        printMsg(false, false);
+        printer.printReturnMsg(false);
     }
 
-    public void printMsg(boolean success, boolean checkoutBook){
-        String successCheckout = "Thank you! Enjoy the book.";
-        String failCheckout = "That book is not available.";
-        String successReturn = "Thank you for returning the book.";
-        String failReturn = "That is not a valid book to return";
-
-        String checkOutMsg = success ? successCheckout : failCheckout;
-        String returnMsg = success ? successReturn : failReturn;
-
-        if(checkoutBook) printStream.println(checkOutMsg);
-        else printStream.println(returnMsg);
-    }
 
 
 }

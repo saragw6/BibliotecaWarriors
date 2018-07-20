@@ -58,11 +58,5 @@ public class BookTest {
     public void bookShouldHaveAnID(){
         assertEquals(testBook.id, 1);
     }
-
-    @Test
-    public void printDetailsShouldPrintIDTitleDateAuthor() {
-        System.setOut(printStream);
-        testBook.printDetails();
-        verify(printStream).println("Book ID: 1 | Harry Potter and the Prisoner of Azkaban | Rowling, J.K. | 1996");
-    }
+    
 }

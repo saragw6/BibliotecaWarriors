@@ -13,10 +13,6 @@ public class Book {
         this.availability = availability;
     }
 
-    public void printDetails() {
-        System.out.println("Book ID: " + this.id + " | " + this.title + " | " + this.author + " | " + this.pubDate);
-    }
-
     public void toggleAvail() {
         availability = !availability;
 

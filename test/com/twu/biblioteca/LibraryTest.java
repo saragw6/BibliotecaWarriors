@@ -1,7 +1,6 @@
 package com.twu.biblioteca;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -13,15 +12,13 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.core.IsCollectionContaining.hasItems;
-
 
 
 public class LibraryTest {
     private ArrayList<Book> testBookList;
     private Library testLibrary;
 
+    private Printer printer;
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
@@ -29,6 +26,7 @@ public class LibraryTest {
     public void setUp() {
         testBookList = new ArrayList<Book>();
         printStream = mock(PrintStream.class);
+        printer = new Printer(printStream);
         bufferedReader = mock(BufferedReader.class);
         testLibrary = new Library(testBookList, printStream, bufferedReader);
         System.setOut(printStream);
@@ -47,7 +45,7 @@ public class LibraryTest {
         testLibrary.addBook(testBook);
         testLibrary.listBooks();
 
-        verify(printStream).println(testBook.title + " | " + testBook.author + " | " + testBook.pubDate);
+        verify(printStream).println(testBook.id + " | " + testBook.title + " | " + testBook.author + " | " + testBook.pubDate);
     }
 
 
@@ -60,8 +58,8 @@ public class LibraryTest {
         testLibrary.addBook(bookTwo);
 
         testLibrary.listBooks();
-        verify(printStream).println(bookOne.title + " | " + bookOne.author + " | " + bookOne.pubDate);
-        verify(printStream).println(bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
+        verify(printStream).println(bookOne.id + " | " + bookOne.title + " | " + bookOne.author + " | " + bookOne.pubDate);
+        verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
 
     }
 
@@ -114,13 +112,13 @@ public class LibraryTest {
         Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);
         testLibrary.returnById(1);
-        verify(printStream).println("That is not a valid book to return");
+        verify(printStream).println("That is not a valid book to return.");
     }
 
     @Test
     public void unsuccessfulReturnByDoesNotExist(){
         testLibrary.returnById(10);
-        verify(printStream).println("That is not a valid book to return");
+        verify(printStream).println("That is not a valid book to return.");
 
     }
 
@@ -131,6 +129,6 @@ public class LibraryTest {
         Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
         testLibrary.addBook(bookTwo);
         testLibrary.listBooks();
-        verify(printStream).println(bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
+        verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
     }
 }
