@@ -17,12 +17,14 @@ public class BibliotecaAppTest {
     private PrintStream printStream;
     private Scanner scanner;
     private BibliotecaApp app;
+    private Library library;
 
     @Before
     public void setUp(){
         app = new BibliotecaApp();
         printStream = new PrintStream(System.out);
         System.setOut(printStream);
+        library = mock (Library.class);
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -30,20 +32,18 @@ public class BibliotecaAppTest {
         ByteArrayInputStream input = new ByteArrayInputStream("list books".getBytes());
         System.setIn(input);
 
-        Library library = mock (Library.class);
+
         app.main(null);
         verify(library, times(1)).listBooks();
 
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void checkoutTest() {
-        ByteArrayInputStream input = new ByteArrayInputStream("checkout".getBytes());
-        System.setIn(input);
-
-        Library library = mock (Library.class);
-        app.main(null);
-//        verify(library, times(1)).();
+        library = app.createDefaultLibrary(printStream);
+        app.libraryCheckout(library);
+//        assertTrue(p);
+        verify(printStream).println("Thank you! Enjoy the book.");
 
     }
 
@@ -52,7 +52,7 @@ public class BibliotecaAppTest {
         ByteArrayInputStream input = new ByteArrayInputStream("return".getBytes());
         System.setIn(input);
 
-        Library library = mock (Library.class);
+//        Library library = mock (Library.Libraryclass);
         app.main(null);
 //        verify(library, times(1)).();
 

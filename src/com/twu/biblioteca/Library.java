@@ -63,8 +63,8 @@ public class Library {
         String checkOutMsg = success ? successCheckout : failCheckout;
         String returnMsg = success ? successReturn : failReturn;
 
-        if(checkoutBook) System.out.println(checkOutMsg);
-        else System.out.println(returnMsg);
+        if(checkoutBook) printStream.println(checkOutMsg);
+        else printStream.println(returnMsg);
     }
 
 

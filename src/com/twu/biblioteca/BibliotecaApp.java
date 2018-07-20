@@ -27,7 +27,7 @@ public class BibliotecaApp {
         System.out.println("Welcome to Biblioteca!");
     }
 
-    private static Library createDefaultLibrary(PrintStream stream){
+    public static Library createDefaultLibrary(PrintStream stream){
         Library library = new Library(new ArrayList<Book>(), stream, new BufferedReader(new InputStreamReader(System.in)));
 
         Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
@@ -62,5 +62,10 @@ public class BibliotecaApp {
             }
         }
         return running;
+    }
+
+    public static void libraryCheckout(Library library){
+
+
     }
 }

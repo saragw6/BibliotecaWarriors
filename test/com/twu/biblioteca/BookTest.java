@@ -60,9 +60,9 @@ public class BookTest {
     }
 
     @Test
-    public void printDetailsShouldPrintTitleDateAuthor() {
+    public void printDetailsShouldPrintIDTitleDateAuthor() {
         System.setOut(printStream);
         testBook.printDetails();
-        verify(printStream).println("Harry Potter and the Prisoner of Azkaban | Rowling, J.K. | 1996");
+        verify(printStream).println("Book ID: 1 | Harry Potter and the Prisoner of Azkaban | Rowling, J.K. | 1996");
     }
 }

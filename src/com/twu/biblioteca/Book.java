@@ -14,7 +14,7 @@ public class Book {
     }
 
     public void printDetails() {
-        System.out.println(this.title + " | " + this.author + " | " + this.pubDate);
+        System.out.println("Book ID: " + this.id + " | " + this.title + " | " + this.author + " | " + this.pubDate);
     }
 
     public void toggleAvail() {
