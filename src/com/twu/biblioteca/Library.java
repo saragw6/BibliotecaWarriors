@@ -35,7 +35,7 @@ public class Library {
 
     public Book checkoutById(int id) {
         for (Book book : this.bookList) {
-            if (book.getID() == id) {
+            if (book.getID() == id && book.isAvailable()) {
                 return book;
             }
         }

@@ -72,5 +72,18 @@ public class LibraryTest {
 
     }
 
-    
+    @Test
+    public void unsuccessfulCheckoutByUnavailableBook() {
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
+        testLibrary.addBook(bookOne);
+        Book userBook = testLibrary.getBookList().get(0);
+        Book checkedOutBook = testLibrary.checkoutById(1);
+        assertEquals(checkedOutBook,null);
+    }
+
+    @Test
+    public void unsuccessfulCheckoutByDoesNotExist() {
+        Book checkedOutBook = testLibrary.checkoutById(1);
+        assertEquals(checkedOutBook,null);
+    }
 }
