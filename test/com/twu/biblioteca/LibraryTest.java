@@ -36,8 +36,7 @@ public class LibraryTest {
         bufferedReader = mock(BufferedReader.class);
         testLibrary = new Library(testBookList, printStream, bufferedReader);
     }
-
-
+    
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
         System.setOut(printStream);
