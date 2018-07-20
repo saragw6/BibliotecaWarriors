@@ -3,16 +3,27 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 
 public class BookTest {
+    private PrintStream printStream;
+    private BufferedReader bufferedReader;
 
     private Book testBook;
     @Before
     public void createTestBook(){
+        printStream = mock(PrintStream.class);
+        bufferedReader = mock(BufferedReader.class);
         Book book = new Book(1, "Harry Potter and the Prisoner of Azkaban", "Rowling, J.K.", 1996, true);
         testBook = book;
     }
@@ -45,4 +56,10 @@ public class BookTest {
         assertEquals(testBook.id, 1);
     }
 
+    @Test
+    public void printDetailsShouldPrintTitleDateAuthor() {
+        System.setOut(printStream);
+        testBook.printDetails();
+        verify(printStream).println("Harry Potter and the Prisoner of Azkaban | Rowling, J.K. | 1996");
+    }
 }

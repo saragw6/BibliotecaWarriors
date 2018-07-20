@@ -1,6 +1,11 @@
 package com.twu.biblioteca;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 public class Book {
+    private PrintStream printStream;
+    private BufferedReader bufferedReader;
 
     String title, author;
     int pubDate, id;
@@ -11,5 +16,9 @@ public class Book {
         this.author = author;
         this.pubDate = pubDate;
         this.availability = availability;
+    }
+
+    public void printDetails() {
+        System.out.println(this.title + " | " + this.author + " | " + this.pubDate);
     }
 }
