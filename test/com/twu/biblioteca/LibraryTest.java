@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -21,6 +22,7 @@ public class LibraryTest {
     private PrintStream printStream;
     private BufferedReader bufferedReader;
 
+    @Before
     public void setUp() {
         testBookList = new ArrayList<Book>();
         printStream = mock(PrintStream.class);
@@ -30,7 +32,6 @@ public class LibraryTest {
     
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
-        setUp();
         System.setOut(printStream);
         testLibrary.listBooks();
         verify(printStream).print("");
@@ -38,7 +39,6 @@ public class LibraryTest {
 
     @Test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        setUp();
         Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
 
         testLibrary.addBook(testBook);
@@ -50,8 +50,6 @@ public class LibraryTest {
 
     @Test
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
-        setUp();
-
         Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
         Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);
