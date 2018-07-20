@@ -37,6 +37,28 @@ public class BibliotecaAppTest {
     }
 
     @Test(expected = NoSuchElementException.class)
+    public void checkoutTest() {
+        ByteArrayInputStream input = new ByteArrayInputStream("checkout".getBytes());
+        System.setIn(input);
+
+        Library library = mock (Library.class);
+        app.main(null);
+//        verify(library, times(1)).();
+
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void returnTest() {
+        ByteArrayInputStream input = new ByteArrayInputStream("return".getBytes());
+        System.setIn(input);
+
+        Library library = mock (Library.class);
+        app.main(null);
+//        verify(library, times(1)).();
+
+    }
+
+    @Test(expected = NoSuchElementException.class)
     public void invalidMenuOptions(){
         ByteArrayInputStream input = new ByteArrayInputStream("INVALID".getBytes());
         System.setIn(input);
