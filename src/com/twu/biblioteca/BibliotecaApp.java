@@ -31,6 +31,9 @@ public class BibliotecaApp {
             else if(response.equalsIgnoreCase("quit")){
                 running = false;
             }
+            else{
+                ps.println("Invaild Menu Option");
+            }
         }
     }
 }
