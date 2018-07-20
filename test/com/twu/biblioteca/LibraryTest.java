@@ -9,9 +9,12 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
 
 
 
@@ -63,28 +66,62 @@ public class LibraryTest {
     }
 
     @Test
+    public void bookNotInLibrary(){
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        assertFalse(testLibrary.getBookList().contains(bookOne));
+    }
+
+    @Test
+    public void bookInLibrary(){
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        testLibrary.addBook(bookOne);
+        assertTrue(testLibrary.getBookList().contains(bookOne));
+    }
+
+    @Test
     public void correctBookCheckedOut() {
         Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);
-        Book userBook = testLibrary.getBookList().get(0);
-        Book checkedoutBook = testLibrary.checkoutById(userBook.getID());
-        assertEquals(userBook.getID(), checkedoutBook.getID());
-
+        testLibrary.checkoutById(1);
+        verify(printStream).println("Thank you! Enjoy the book.");
     }
 
     @Test
     public void unsuccessfulCheckoutByUnavailableBook() {
         Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
         testLibrary.addBook(bookOne);
-        Book userBook = testLibrary.getBookList().get(0);
-        Book checkedOutBook = testLibrary.checkoutById(1);
-        assertEquals(checkedOutBook,null);
+        testLibrary.checkoutById(1);
+        verify(printStream).println("That book is not available.");
     }
 
     @Test
     public void unsuccessfulCheckoutByDoesNotExist() {
-        Book checkedOutBook = testLibrary.checkoutById(1);
-        assertEquals(checkedOutBook,null);
+        testLibrary.checkoutById(10);
+        verify(printStream).println("That book is not available.");
+    }
+
+    @Test
+    public void correctBookReturned(){
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
+        testLibrary.addBook(bookOne);
+        testLibrary.returnById(1);
+        verify(printStream).println("Thank you for returning the book.");
+
+    }
+
+    @Test
+    public void unsuccessfulReturnByAvailableBook(){
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        testLibrary.addBook(bookOne);
+        testLibrary.returnById(1);
+        verify(printStream).println("That is not a valid book to return");
+    }
+
+    @Test
+    public void unsuccessfulReturnByDoesNotExist(){
+        testLibrary.returnById(10);
+        verify(printStream).println("That is not a valid book to return");
+
     }
 
     @Test

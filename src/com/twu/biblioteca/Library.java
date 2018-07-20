@@ -35,13 +35,37 @@ public class Library {
         return this.bookList;
     }
 
-    public Book checkoutById(int id) {
+    public void checkoutById(int id) {
         for (Book book : this.bookList) {
             if (book.getID() == id && book.isAvailable()) {
-                return book;
+                printMsg(true, true);
             }
         }
+        printMsg(false, true);
 
-        return null;
     }
+
+    public void returnById(int id){
+        for (Book book : this.bookList) {
+            if (book.getID() == id && !book.isAvailable()) {
+                printMsg(true, false);
+            }
+        }
+        printMsg(false, false);
+    }
+
+    public void printMsg(boolean success, boolean checkoutBook){
+        String successCheckout = "Thank you! Enjoy the book.";
+        String failCheckout = "That book is not available.";
+        String successReturn = "Thank you for returning the book.";
+        String failReturn = "That is not a valid book to return";
+
+        String checkOutMsg = success ? successCheckout : failCheckout;
+        String returnMsg = success ? successReturn : failReturn;
+
+        if(checkoutBook) System.out.println(checkOutMsg);
+        else System.out.println(returnMsg);
+    }
+
+
 }
