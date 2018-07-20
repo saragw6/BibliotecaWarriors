@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
+    public static boolean isRunning;
+
     public static void main(String[] args) {
 
         welcomeMessage();
@@ -16,7 +18,7 @@ public class BibliotecaApp {
         Scanner userInput = new Scanner(System.in);
         PrintStream stream = new PrintStream(System.out);
         Library library = new Library(new ArrayList<Book>(), stream, new BufferedReader(new InputStreamReader(System.in)));
-        mainMenu(library, userInput, stream);
+        isRunning = mainMenu(library, userInput, stream);
 
     }
 
@@ -24,10 +26,9 @@ public class BibliotecaApp {
         System.out.println("Welcome to Biblioteca!");
     }
 
-    private static void mainMenu(Library library, Scanner scan, PrintStream ps){
+    private static boolean mainMenu(Library library, Scanner scan, PrintStream ps){
         Boolean running = true;
         while(running){
-            ps.println("What would you like to do?");
             ps.println("What would you like to do?\n List Books   Quit");
             String response = scan.nextLine();
 
@@ -41,5 +42,6 @@ public class BibliotecaApp {
                 ps.println("Invaild Menu Option");
             }
         }
+        return running;
     }
 }
