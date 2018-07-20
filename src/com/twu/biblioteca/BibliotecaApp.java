@@ -52,7 +52,7 @@ public class BibliotecaApp {
                 ps.println("Return not currently available");
             }
             else if (response.equalsIgnoreCase("checkout")){
-                ps.println("Checkout not currently available");
+                libraryCheckout(library, ps, scan);
             }
             else if(response.equalsIgnoreCase("quit")){
                 running = false;
@@ -64,7 +64,17 @@ public class BibliotecaApp {
         return running;
     }
 
-    public static void libraryCheckout(Library library){
+    public static void libraryCheckout(Library library, PrintStream ps, Scanner scanner){
+        ps.println("Type the ID of the book you would like to checkout:");
+        try {
+            Integer response = scanner.nextInt();
+            library.checkoutById(response);
+        }
+        catch (Exception e){
+            ps.println("Not a valid ID");
+
+        }
+
 
 
     }

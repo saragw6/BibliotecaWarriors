@@ -39,6 +39,7 @@ public class Library {
         for (Book book : this.bookList) {
             if (book.getID() == id && book.isAvailable()) {
                 printMsg(true, true);
+                return;
             }
         }
         printMsg(false, true);

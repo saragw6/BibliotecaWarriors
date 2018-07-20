@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -18,11 +19,12 @@ public class BibliotecaAppTest {
     private Scanner scanner;
     private BibliotecaApp app;
     private Library library;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @Before
     public void setUp(){
         app = new BibliotecaApp();
-        printStream = new PrintStream(System.out);
+        printStream = new PrintStream(outContent);
         System.setOut(printStream);
         library = mock (Library.class);
     }
@@ -41,9 +43,12 @@ public class BibliotecaAppTest {
     @Test
     public void checkoutTest() {
         library = app.createDefaultLibrary(printStream);
-        app.libraryCheckout(library);
-//        assertTrue(p);
-        verify(printStream).println("Thank you! Enjoy the book.");
+        String id = Integer.toString(library.getBookList().get(0).getID());
+        ByteArrayInputStream input = new ByteArrayInputStream(id.getBytes());
+        System.setIn(input);
+        app.libraryCheckout(library, printStream, new Scanner(System.in));
+        assertEquals("Type the ID of the book you would like to checkout:\nThank you! Enjoy the book.\n", outContent.toString());
+
 
     }
 
