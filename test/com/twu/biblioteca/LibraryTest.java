@@ -86,4 +86,9 @@ public class LibraryTest {
         Book checkedOutBook = testLibrary.checkoutById(1);
         assertEquals(checkedOutBook,null);
     }
+
+    @Test
+    public void doNotPrintUnavailableBooks() {
+        
+    }
 }
