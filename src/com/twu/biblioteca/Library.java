@@ -15,7 +15,7 @@ public class Library {
         this.bufferedReader = bufferedReader;
     }
 
-    public addBook(Book book){
+    public void addBook(Book book){
         bookList.add(book);
     }
 
