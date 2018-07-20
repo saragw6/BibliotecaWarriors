@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -26,5 +27,19 @@ public class Library {
                 bookList.get(i).printDetails();
             }
         }
+    }
+
+    public ArrayList<Book> getBookList() {
+        return this.bookList;
+    }
+
+    public Book checkoutById(int id) {
+        for (Book book : this.bookList) {
+            if (book.getID() == id) {
+                return book;
+            }
+        }
+
+        return null;
     }
 }

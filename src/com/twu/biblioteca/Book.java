@@ -26,7 +26,7 @@ public class Book {
         return availability;
     }
 
-    public Object getID() {
+    public int getID() {
         return id;
     }
 }
