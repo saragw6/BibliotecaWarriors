@@ -31,7 +31,7 @@ public class LibraryTest {
 
     @Test
     public void setUp() throws Exception {
-        testBookList = new ArrayList();
+        testBookList = new ArrayList()<Book>;
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
         testLibrary = new Library(testBookList, printStream, bufferedReader);
@@ -47,7 +47,7 @@ public class LibraryTest {
 
     @Test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes"., 1959);
+        Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959);
         testLibrary.addBook(testBook);
 
         System.setOut(printStream);
