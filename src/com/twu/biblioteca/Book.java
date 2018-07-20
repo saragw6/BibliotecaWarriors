@@ -1,11 +1,6 @@
 package com.twu.biblioteca;
 
-import java.io.BufferedReader;
-import java.io.PrintStream;
-
 public class Book {
-    private PrintStream printStream;
-    private BufferedReader bufferedReader;
 
     String title, author;
     int pubDate, id;
