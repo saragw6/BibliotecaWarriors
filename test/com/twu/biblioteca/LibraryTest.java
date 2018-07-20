@@ -62,12 +62,13 @@ public class LibraryTest {
 
     }
 
-//    @Test
-//    @Ignore
-//    public void correctBookCheckedOut() {
-//        Book userBook = testLibrary.getBookList().get(0);
-//        Book checkedoutBook = testLibrary.checkoutById(userBook.getID());
-//        assertEquals(userBook.getID(), checkedoutBook.getID());
-//
-//    }
+    @Test
+    public void correctBookCheckedOut() {
+        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        testLibrary.addBook(bookOne);
+        Book userBook = testLibrary.getBookList().get(0);
+        Book checkedoutBook = testLibrary.checkoutById(userBook.getID());
+        assertEquals(userBook.getID(), checkedoutBook.getID());
+
+    }
 }
