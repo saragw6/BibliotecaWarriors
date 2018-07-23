@@ -43,7 +43,7 @@ public class BibliotecaApp {
             ps.println("What would you like to do?\n\tList Books   Checkout   Return   Quit");
             String response = scan.nextLine();
             if (response.equalsIgnoreCase("list books")){
-                library.listBooks();
+                library.listItems();
             }
             else if(response.equalsIgnoreCase("return")){
                 libraryFunctions(false, library, ps);

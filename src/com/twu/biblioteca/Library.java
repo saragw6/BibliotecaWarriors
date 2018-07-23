@@ -6,52 +6,58 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class Library {
-    private ArrayList<Book> bookList;
+    private ArrayList<LibraryItem> catalog;
     private Printer printer;
 
-    public Library(ArrayList<Book> bookList, PrintStream printStream, BufferedReader bufferedRead) {
-        this.bookList = bookList;
+    public Library(ArrayList<LibraryItem> catalog, PrintStream printStream, BufferedReader bufferedRead) {
+        this.catalog = catalog;
         this.printer = new Printer(printStream);
     }
 
     public void addBook(Book book){
-        bookList.add(book);
+        catalog.add(book);
     }
 
-    public void listBooks(){
-        if(bookList.isEmpty()) System.out.print("");
+    public void listItems(){
+        if(catalog.isEmpty()) System.out.print("");
         else {
-            for(int i = 0; i < bookList.size(); i++){
-                if (bookList.get(i).isAvailable()) {
-                    printer.printBookDetails(bookList.get(i));
+            for(int i = 0; i < catalog.size(); i++){
+                if (catalog.get(i).isAvailable()) {
+                    printer.printDetails(catalog.get(i));
                 }
             }
         }
     }
 
-    public ArrayList<Book> getBookList() {
-        return this.bookList;
+    public ArrayList<LibraryItem> getCatalog() {
+        return this.catalog;
     }
 
-    public void checkoutById(int id) {
-        for (Book book : this.bookList) {
-            if (book.getID() == id && book.isAvailable()) {
-                printer.printCheckoutMsg(true);
+    public void checkoutById(String id) {
+        String itemType = id.startsWith("B") ? "book" : "movie";
+        for (LibraryItem item : this.catalog) {
+            if (item.getID().equals(id) && item.isAvailable()) {
+                printer.printCheckoutMsg(true, itemType);
                 return;
             }
         }
-        printer.printCheckoutMsg(false);
+
+        printer.printCheckoutMsg(false, itemType);
 
     }
 
-    public void returnById(int id){
-        for (Book book : this.bookList) {
-            if (book.getID() == id && !book.isAvailable()) {
-                printer.printReturnMsg(true);
+
+    public void returnById(String id){
+        String itemType = id.startsWith("B") ? "book" : "movie";
+        for (LibraryItem item : this.catalog) {
+            if (item.getID().equals(id) && item.isAvailable()) {
+                printer.printReturnMsg(true, itemType);
                 return;
             }
         }
-        printer.printReturnMsg(false);
+
+        printer.printReturnMsg(false, itemType);
+
     }
 
 

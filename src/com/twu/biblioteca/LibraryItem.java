@@ -1,8 +1,8 @@
 package com.twu.biblioteca;
 
 public class LibraryItem {
-    String title, creator;
-    int pubDate, id;
+    String title, creator, id;
+    int pubDate;
     boolean availability;
 
     public void toggleAvail() {
@@ -13,7 +13,7 @@ public class LibraryItem {
         return availability;
     }
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 }
