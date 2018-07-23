@@ -7,11 +7,26 @@ import java.util.ArrayList;
 
 public class Library {
     private ArrayList<LibraryItem> catalog;
+    private ArrayList<User> userList;
     private Printer printer;
+    private String currentUser = null;
 
     public Library(ArrayList<LibraryItem> catalog, PrintStream printStream, BufferedReader bufferedRead) {
         this.catalog = catalog;
         this.printer = new Printer(printStream);
+        userList = new ArrayList<>();
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public void addUser(User user){
+        userList.add(user);
     }
 
     public void addItem(LibraryItem item){

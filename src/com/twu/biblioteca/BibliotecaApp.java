@@ -33,6 +33,10 @@ public class BibliotecaApp {
 
         library.addItem(bookOne);
         library.addItem(bookTwo);
+
+        User userOne = new User("Joe Smith", "was@sad.xon", "123-231-2341", "1234");
+        User userTwo = new User("Iona Book", "great@books.com", "321-423-9021", "tolstoy");
+
         return library;
 
     }
