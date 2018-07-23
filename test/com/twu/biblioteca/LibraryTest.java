@@ -204,6 +204,7 @@ public class LibraryTest {
         testLibrary.addMovie(movieTwo);
         testLibrary.listBooks();
         verify(printStream).println(movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
+
     }
 
 }
