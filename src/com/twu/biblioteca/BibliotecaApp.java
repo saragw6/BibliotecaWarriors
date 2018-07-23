@@ -46,10 +46,10 @@ public class BibliotecaApp {
                 library.listBooks();
             }
             else if(response.equalsIgnoreCase("return")){
-                ps.println("Return not currently available");
+                libraryFunctions(false, library, ps);
             }
             else if (response.equalsIgnoreCase("checkout")){
-                libraryCheckout(library, ps);
+                libraryFunctions(true, library, ps);
             }
             else if(response.equalsIgnoreCase("quit")){
                 running = false;
@@ -62,18 +62,24 @@ public class BibliotecaApp {
         return running;
     }
 
-    public static void libraryCheckout(Library library, PrintStream ps){
-        ps.println("Type the ID of the book you would like to checkout:");
+    public static void libraryFunctions(Boolean checkOrReturn, Library library, PrintStream ps){
+        String functionType = (checkOrReturn) ? "checkout:" : "return:" ;
+        ps.println("Type the ID of the book you would like to " + functionType);
         Scanner checkScan = new Scanner(System.in);
         try {
             Integer response = checkScan.nextInt();
-            library.checkoutById(response);
+            if (checkOrReturn){
+                library.checkoutById(response);
+            }
+            else {
+                library.returnById(response);
+            }
         }
         catch (Exception e){
             ps.println("Not a valid ID");
 
         }
-        
 
     }
+
 }

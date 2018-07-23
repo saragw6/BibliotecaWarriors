@@ -18,8 +18,9 @@ public class BibliotecaAppTest {
     private PrintStream printStream;
     private Scanner scanner;
     private BibliotecaApp app;
-    private Library library;
+    private Library library, testLibrary;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private Book checkedOutBook;
 
     @Before
     public void setUp(){
@@ -27,6 +28,10 @@ public class BibliotecaAppTest {
         printStream = new PrintStream(outContent);
         System.setOut(printStream);
         library = mock (Library.class);
+        testLibrary = app.createDefaultLibrary(printStream);
+        checkedOutBook = new Book(3, "The Sound and the Fury", "Faulkner, William", 1923, false);
+        testLibrary.addBook(checkedOutBook);
+
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -42,24 +47,22 @@ public class BibliotecaAppTest {
 
     @Test
     public void checkoutTest() {
-        library = app.createDefaultLibrary(printStream);
-        String id = Integer.toString(library.getBookList().get(0).getID());
+        String id = Integer.toString(testLibrary.getBookList().get(0).getID());
         ByteArrayInputStream input = new ByteArrayInputStream(id.getBytes());
         System.setIn(input);
-        app.libraryCheckout(library, printStream);
+        app.libraryFunctions(true, testLibrary, printStream);
         assertEquals("Type the ID of the book you would like to checkout:\nThank you! Enjoy the book.\n", outContent.toString());
-
 
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void returnTest() {
-        ByteArrayInputStream input = new ByteArrayInputStream("return".getBytes());
+        String id = Integer.toString(checkedOutBook.getID());
+        ByteArrayInputStream input = new ByteArrayInputStream(id.getBytes());
         System.setIn(input);
+        app.libraryFunctions(false, testLibrary, printStream);
 
-//        Library library = mock (Library.Libraryclass);
-        app.main(null);
-//        verify(library, times(1)).();
+        assertEquals("Type the ID of the book you would like to return:\nThank you for returning the book.\n", outContent.toString());
 
     }
 
