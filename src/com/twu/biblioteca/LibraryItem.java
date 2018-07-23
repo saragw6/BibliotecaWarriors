@@ -4,6 +4,7 @@ public class LibraryItem {
     String title, creator, id;
     int pubDate;
     boolean availability;
+    String ownerID = null;
 
     
 
@@ -18,4 +19,13 @@ public class LibraryItem {
     public String getID() {
         return id;
     }
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
+
 }

@@ -19,6 +19,11 @@ public class Printer {
     static String checkOutMsg;
     static String returnMsg;
 
+    static String successfulEmailSet = "You now have a new email";
+    static String unsuccessfulEmailSet = "Invalid email; please try again";
+    static String successfulPhoneSet = "You now have a new phone";
+    static String unsuccessfulPhoneSet = "Invalid phone; please try again";
+
     public void printDetails(LibraryItem libItem) {
         ps.println(libItem.toString());
     }
@@ -61,6 +66,16 @@ public class Printer {
 
      public static void printCheckPassword(boolean success){
         String returnMsg = success ? passwordMatchMsg : passwordIncorrectMsg;
+        ps.println(returnMsg);
+     }
+
+     public static void printSetEmailResult(boolean result){
+        String returnMsg = result ? successfulEmailSet : unsuccessfulEmailSet;
+        ps.print(returnMsg);
+     }
+
+     public static void printSetPhoneResult(boolean result){
+        String returnMsg = result ? successfulPhoneSet : unsuccessfulPhoneSet;
         ps.println(returnMsg);
      }
 
