@@ -168,35 +168,28 @@ public class LibraryTest {
 //    }
 
     @Test
-    @Ignore
     public void correctMovieCheckedOut() {
         Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", true);
         testLibrary.addItem(movieOne);
-        Movie userMovie = testLibrary.getMovieList().get(0);
-        Movie checkedoutMovie = testLibrary.checkoutById(userMovie.getID());
-        assertEquals(userMovie.getID(), checkedoutMovie.getID());
-
+        testLibrary.checkoutById("M1");
+        verify(printStream).println("Thank you! Enjoy the movie.");
     }
 
     @Test
-    @Ignore
     public void unsuccessfulCheckoutByUnavailableMovie() {
         Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", false);
         testLibrary.addItem(movieOne);
-        Movie userMovie = testLibrary.getMovieList().get(0);
-        Movie checkedOutMovie = testLibrary.checkoutById("M1");
-        assertEquals(checkedOutMovie,null);
+        testLibrary.checkoutById("M1");
+        verify(printStream).println("That movie is not available.");
     }
 
     @Test
-    @Ignore
     public void unsuccessfulCheckoutByDoesNotExist() {
-        Movie checkedOutMovie = testLibrary.checkoutById("M1");
-        assertEquals(checkedOutMovie,null);
+        testLibrary.checkoutById("M1");
+        verify(printStream).println("That movie is not available.");
     }
 
     @Test
-    @Ignore
     public void printOnlyAvailMovies() {
         Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", false);
         testLibrary.addItem(movieOne);

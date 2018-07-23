@@ -24,7 +24,7 @@ public class BookTest {
     public void createTestBook(){
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
-        Book book = new Book(1, "Harry Potter and the Prisoner of Azkaban", "Rowling, J.K.", 1996, true);
+        Book book = new Book("B1", "Harry Potter and the Prisoner of Azkaban", "Rowling, J.K.", 1996, true);
         testBook = book;
     }
 
