@@ -67,7 +67,7 @@ public class BibliotecaApp {
         ps.println("Type the ID of the book you would like to " + functionType);
         Scanner checkScan = new Scanner(System.in);
         try {
-            Integer response = checkScan.nextInt();
+            String response = checkScan.nextLine();
             if (checkOrReturn){
                 library.checkoutById(response);
             }

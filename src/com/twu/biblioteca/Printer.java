@@ -16,8 +16,8 @@ public class Printer {
     static String failCheckoutMsg = "That " + itemType + " is not available.";
     static String successReturnMsg = "Thank you for returning the " + itemType + ".";
     static String failReturnMsg = "That is not a valid " + itemType + " to return.";
-
-
+    static String passwordIncorrectMsg = "Incorrect Password, Try Again";
+    static String passwordMatchMsg = "You are now logged in";
     public void printDetails(LibraryItem libItem) {
         ps.println(libItem);
     }
@@ -38,6 +38,15 @@ public class Printer {
      public static void printReturnMsg(boolean success, String itemType){
          String returnMsg = success ? successReturnMsg : failReturnMsg;
          ps.println(returnMsg);
+     }
+
+     public static void printUserDetails(User user){
+        ps.println(user.toString());
+     }
+
+     public static void printCheckPassword(boolean success){
+        String returnMsg = success ? passwordMatchMsg : passwordIncorrectMsg;
+        ps.println(returnMsg);
      }
 
 

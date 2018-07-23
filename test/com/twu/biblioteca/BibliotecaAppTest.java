@@ -28,7 +28,7 @@ public class BibliotecaAppTest {
         System.setOut(printStream);
         library = mock (Library.class);
         testLibrary = app.createDefaultLibrary(printStream);
-        checkedOutBook = new Book(3, "The Sound and the Fury", "Faulkner, William", 1923, false);
+        checkedOutBook = new Book("B3", "The Sound and the Fury", "Faulkner, William", 1923, false);
         testLibrary.addItem(checkedOutBook);
 
     }
@@ -57,7 +57,7 @@ public class BibliotecaAppTest {
 
     @Test
     public void returnTest() {
-        String id = Integer.toString(checkedOutBook.getID());
+        String id = checkedOutBook.getID();
         ByteArrayInputStream input = new ByteArrayInputStream(id.getBytes());
         System.setIn(input);
         app.libraryFunctions(false, testLibrary, printStream);

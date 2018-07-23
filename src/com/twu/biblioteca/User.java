@@ -17,6 +17,12 @@ public class User {
         this.pass = pass;
     }
 
+    @Override
+    public String toString(){
+        return "Name: " + name + "\nEmail: " + email + "\nPhone: "+
+                phone + "\nID: " + libraryID;
+    }
+
     public String getName(){
         return name;
     }
