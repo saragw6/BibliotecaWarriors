@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -44,8 +45,7 @@ public class LibraryTest {
 
         testLibrary.addBook(testBook);
         testLibrary.listBooks();
-
-        verify(printStream).println(testBook.id + " | " + testBook.title + " | " + testBook.author + " | " + testBook.pubDate);
+        verify(printStream).println(testBook.id + " | " + testBook.title + " | " + testBook.creator + " | " + testBook.pubDate);
     }
 
 
@@ -58,8 +58,8 @@ public class LibraryTest {
         testLibrary.addBook(bookTwo);
 
         testLibrary.listBooks();
-        verify(printStream).println(bookOne.id + " | " + bookOne.title + " | " + bookOne.author + " | " + bookOne.pubDate);
-        verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
+        verify(printStream).println(bookOne.id + " | " + bookOne.title + " | " + bookOne.creator + " | " + bookOne.pubDate);
+        verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.creator + " | " + bookTwo.pubDate);
 
     }
 
@@ -129,6 +129,81 @@ public class LibraryTest {
         Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
         testLibrary.addBook(bookTwo);
         testLibrary.listBooks();
-        verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.author + " | " + bookTwo.pubDate);
+        verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.creator + " | " + bookTwo.pubDate);
     }
+
+    /****************** Movie Tests ********************/
+
+    @Test
+    public void shouldPrintNothingWhenThereAreNoMovies() {
+        testLibrary.listMovies();
+        verify(printStream).print("");
+    }
+
+    @Test
+    @Ignore
+    public void shouldPrintMovieTitleWhenThereIsOneMovie() {
+        Movie testMovie = new Movie(1, "Hush", "Mr. Spook", 2008, "5", true);
+
+        testLibrary.addMovie(testMovie);
+        testLibrary.listMovies();
+
+        verify(printStream).println(testMovie.title + " | " + testMovie.creator + " | " + testMovie.pubDate + " | " + testMovie.rating);
+    }
+
+
+    @Test
+    @Ignore
+    public void shouldPrintBothMovieTitlesWhenThereAreTwoMovies() throws IOException {
+        Movie movieTwo = new Movie(2, "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
+        Movie movieOne = new Movie(1, "Hush", "Mr. Spook", 2008, "5", true);
+
+        testLibrary.addMovie(movieOne);
+        testLibrary.addMovie(movieTwo);
+
+        testLibrary.listMovies();
+        verify(printStream).println(movieOne.title + " | " + movieOne.creator + " | " + movieOne.pubDate + " | " + movieOne.rating);
+        verify(printStream).println(movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
+
+    }
+
+    @Test
+    @Ignore
+    public void correctMovieCheckedOut() {
+        Movie movieOne = new Movie(1, "Cindarella Story", "Hillary Duff", 2003, "10", true);
+        testLibrary.addBook(movieOne);
+        Movie userMovie = testLibrary.getMovieList().get(0);
+        Movie checkedoutMovie = testLibrary.checkoutById(userMovie.getID());
+        assertEquals(userMovie.getID(), checkedoutMovie.getID());
+
+    }
+
+    @Test
+    @Ignore
+    public void unsuccessfulCheckoutByUnavailableMovie() {
+        Movie movieOne = new Movie(1, "Cindarella Story", "Hillary Duff", 2003, "10", false);
+        testLibrary.addMovie(movieOne);
+        Movie userMovie = testLibrary.getMovieList().get(0);
+        Movie checkedOutMovie = testLibrary.checkoutById(1);
+        assertEquals(checkedOutMovie,null);
+    }
+
+    @Test
+    @Ignore
+    public void unsuccessfulCheckoutByDoesNotExist() {
+        Movie checkedOutMovie = testLibrary.checkoutById(1);
+        assertEquals(checkedOutMovie,null);
+    }
+
+    @Test
+    @Ignore
+    public void printOnlyAvailMovies() {
+        Movie movieOne = new Movie(1, "Cindarella Story", "Hillary Duff", 2003, "10", false);
+        testLibrary.addMovie(movieOne);
+        Movie movieTwo = new Movie(2, "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
+        testLibrary.addMovie(movieTwo);
+        testLibrary.listBooks();
+        verify(printStream).println(movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
+    }
+
 }

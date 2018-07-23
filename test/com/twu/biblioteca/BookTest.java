@@ -36,8 +36,8 @@ public class BookTest {
 
     @Test
     public void bookShouldHaveAnAuthor(){
-        assertNotEquals(testBook.author, "Salinger, J.D.");
-        assertEquals(testBook.author, "Rowling, J.K.");
+        assertNotEquals(testBook.creator, "Salinger, J.D.");
+        assertEquals(testBook.creator, "Rowling, J.K.");
     }
 
     @Test
