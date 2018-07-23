@@ -9,16 +9,17 @@ public class Printer {
         this.ps = ps;
     }
 
+    static String itemType = null;
     static String welcomeMsg = "Welcome to Biblioteca";
     static String invalidMenuOptionMsg = "Select a valid option!";
-    static String successCheckoutMsg = "Thank you! Enjoy the book.";
-    static String failCheckoutMsg = "That book is not available.";
-    static String successReturnMsg = "Thank you for returning the book.";
-    static String failReturnMsg = "That is not a valid book to return.";
+    static String successCheckoutMsg = "Thank you! Enjoy the " + itemType + ".";
+    static String failCheckoutMsg = "That " + itemType + " is not available.";
+    static String successReturnMsg = "Thank you for returning the " + itemType + ".";
+    static String failReturnMsg = "That is not a valid " + itemType + " to return.";
 
 
-    public void printBookDetails(Book book) {
-        ps.println(book.id + " | " + book.title + " | " + book.author + " | " + book.pubDate);
+    public void printDetails(LibraryItem libItem) {
+        ps.println(libItem);
     }
 
      public static void printWelcome(){
@@ -29,12 +30,12 @@ public class Printer {
          ps.println(invalidMenuOptionMsg);
      }
 
-     public static void printCheckoutMsg(boolean success){
+     public static void printCheckoutMsg(boolean success, String itemType){
          String checkOutMsg = success ? successCheckoutMsg : failCheckoutMsg;
          ps.println(checkOutMsg);
      }
 
-     public static void printReturnMsg(boolean success){
+     public static void printReturnMsg(boolean success, String itemType){
          String returnMsg = success ? successReturnMsg : failReturnMsg;
          ps.println(returnMsg);
      }

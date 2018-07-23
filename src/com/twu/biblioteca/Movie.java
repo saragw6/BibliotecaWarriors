@@ -4,7 +4,7 @@ public class Movie extends LibraryItem {
 
     String rating;
 
-    Movie(int id, String title, String author, int pubDate, String rating, boolean availability){
+    Movie(String id, String title, String author, int pubDate, String rating, boolean availability){
         this.id = id;
         this.title = title;
         this.creator = author;
@@ -13,8 +13,9 @@ public class Movie extends LibraryItem {
         this.availability = availability;
     }
 
-    public void printDetails() {
-        System.out.println(this.title + " | " + this.creator + " | " + this.pubDate + " | " + this.rating);
+    @Override
+    public String toString() {
+        return this.id + " | " + this.title + " | " + this.creator + " | " + this.pubDate + " | " + this.rating;
     }
 
 }

@@ -2,7 +2,6 @@ package com.twu.biblioteca;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -36,14 +35,14 @@ public class BibliotecaAppTest {
 
 
         app.main(null);
-        verify(library, times(1)).listBooks();
+        verify(library, times(1)).listItems();
 
     }
 
     @Test
     public void checkoutTest() {
         library = app.createDefaultLibrary(printStream);
-        String id = Integer.toString(library.getBookList().get(0).getID());
+        String id = Integer.toString(library.getCatalog().get(0).getID());
         ByteArrayInputStream input = new ByteArrayInputStream(id.getBytes());
         System.setIn(input);
         app.libraryCheckout(library, printStream, new Scanner(System.in));

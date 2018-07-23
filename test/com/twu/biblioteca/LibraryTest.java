@@ -35,29 +35,29 @@ public class LibraryTest {
     
     @Test
     public void shouldPrintNothingWhenThereAreNoBooks() {
-        testLibrary.listBooks();
+        testLibrary.listItems();
         verify(printStream).print("");
     }
 
     @Test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
-        Book testBook = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        Book testBook = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
 
         testLibrary.addBook(testBook);
-        testLibrary.listBooks();
+        testLibrary.listItems();
         verify(printStream).println(testBook.id + " | " + testBook.title + " | " + testBook.creator + " | " + testBook.pubDate);
     }
 
 
     @Test
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
-        Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        Book bookTwo = new Book("B2", "Modern Romance", "Aziz Ansari", 2015, true);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
 
         testLibrary.addBook(bookOne);
         testLibrary.addBook(bookTwo);
 
-        testLibrary.listBooks();
+        testLibrary.listItems();
         verify(printStream).println(bookOne.id + " | " + bookOne.title + " | " + bookOne.creator + " | " + bookOne.pubDate);
         verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.creator + " | " + bookTwo.pubDate);
 
@@ -65,70 +65,70 @@ public class LibraryTest {
 
     @Test
     public void bookNotInLibrary(){
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
-        assertFalse(testLibrary.getBookList().contains(bookOne));
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        assertFalse(testLibrary.getCatalog().contains(bookOne));
     }
 
     @Test
     public void bookInLibrary(){
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);
-        assertTrue(testLibrary.getBookList().contains(bookOne));
+        assertTrue(testLibrary.getCatalog().contains(bookOne));
     }
 
     @Test
     public void correctBookCheckedOut() {
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);
-        testLibrary.checkoutById(1);
+        testLibrary.checkoutById("B1");
         verify(printStream).println("Thank you! Enjoy the book.");
     }
 
     @Test
     public void unsuccessfulCheckoutByUnavailableBook() {
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, false);
         testLibrary.addBook(bookOne);
-        testLibrary.checkoutById(1);
+        testLibrary.checkoutById("B1");
         verify(printStream).println("That book is not available.");
     }
 
     @Test
     public void unsuccessfulCheckoutByDoesNotExist() {
-        testLibrary.checkoutById(10);
+        testLibrary.checkoutById("B10");
         verify(printStream).println("That book is not available.");
     }
 
     @Test
     public void correctBookReturned(){
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, false);
         testLibrary.addBook(bookOne);
-        testLibrary.returnById(1);
+        testLibrary.returnById("B1");
         verify(printStream).println("Thank you for returning the book.");
 
     }
 
     @Test
     public void unsuccessfulReturnByAvailableBook(){
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
         testLibrary.addBook(bookOne);
-        testLibrary.returnById(1);
+        testLibrary.returnById("B1");
         verify(printStream).println("That is not a valid book to return.");
     }
 
     @Test
     public void unsuccessfulReturnByDoesNotExist(){
-        testLibrary.returnById(10);
+        testLibrary.returnById("B10");
         verify(printStream).println("That is not a valid book to return.");
 
     }
 
     @Test
     public void printOnlyAvailBooks() {
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, false);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, false);
         testLibrary.addBook(bookOne);
-        Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
+        Book bookTwo = new Book("B2", "Modern Romance", "Aziz Ansari", 2015, true);
         testLibrary.addBook(bookTwo);
-        testLibrary.listBooks();
+        testLibrary.listItems();
         verify(printStream).println(bookTwo.id + " | " + bookTwo.title + " | " + bookTwo.creator + " | " + bookTwo.pubDate);
     }
 
@@ -143,7 +143,7 @@ public class LibraryTest {
     @Test
     @Ignore
     public void shouldPrintMovieTitleWhenThereIsOneMovie() {
-        Movie testMovie = new Movie(1, "Hush", "Mr. Spook", 2008, "5", true);
+        Movie testMovie = new Movie("M1", "Hush", "Mr. Spook", 2008, "5", true);
 
         testLibrary.addMovie(testMovie);
         testLibrary.listMovies();
@@ -155,8 +155,8 @@ public class LibraryTest {
     @Test
     @Ignore
     public void shouldPrintBothMovieTitlesWhenThereAreTwoMovies() throws IOException {
-        Movie movieTwo = new Movie(2, "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
-        Movie movieOne = new Movie(1, "Hush", "Mr. Spook", 2008, "5", true);
+        Movie movieTwo = new Movie("M2", "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
+        Movie movieOne = new Movie("M1", "Hush", "Mr. Spook", 2008, "5", true);
 
         testLibrary.addMovie(movieOne);
         testLibrary.addMovie(movieTwo);
@@ -170,7 +170,7 @@ public class LibraryTest {
     @Test
     @Ignore
     public void correctMovieCheckedOut() {
-        Movie movieOne = new Movie(1, "Cindarella Story", "Hillary Duff", 2003, "10", true);
+        Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", true);
         testLibrary.addBook(movieOne);
         Movie userMovie = testLibrary.getMovieList().get(0);
         Movie checkedoutMovie = testLibrary.checkoutById(userMovie.getID());
@@ -181,28 +181,28 @@ public class LibraryTest {
     @Test
     @Ignore
     public void unsuccessfulCheckoutByUnavailableMovie() {
-        Movie movieOne = new Movie(1, "Cindarella Story", "Hillary Duff", 2003, "10", false);
+        Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", false);
         testLibrary.addMovie(movieOne);
         Movie userMovie = testLibrary.getMovieList().get(0);
-        Movie checkedOutMovie = testLibrary.checkoutById(1);
+        Movie checkedOutMovie = testLibrary.checkoutById("M1");
         assertEquals(checkedOutMovie,null);
     }
 
     @Test
     @Ignore
     public void unsuccessfulCheckoutByDoesNotExist() {
-        Movie checkedOutMovie = testLibrary.checkoutById(1);
+        Movie checkedOutMovie = testLibrary.checkoutById("M1");
         assertEquals(checkedOutMovie,null);
     }
 
     @Test
     @Ignore
     public void printOnlyAvailMovies() {
-        Movie movieOne = new Movie(1, "Cindarella Story", "Hillary Duff", 2003, "10", false);
+        Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", false);
         testLibrary.addMovie(movieOne);
-        Movie movieTwo = new Movie(2, "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
+        Movie movieTwo = new Movie("M2", "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
         testLibrary.addMovie(movieTwo);
-        testLibrary.listBooks();
+        testLibrary.listItems();
         verify(printStream).println(movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
 
     }

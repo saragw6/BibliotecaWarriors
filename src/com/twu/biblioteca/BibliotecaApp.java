@@ -45,7 +45,7 @@ public class BibliotecaApp {
             String response = scan.nextLine();
 
             if (response.equalsIgnoreCase("list books")){
-                library.listBooks();
+                library.listItems();
             }
             else if(response.equalsIgnoreCase("return")){
                 ps.println("Return not currently available");
