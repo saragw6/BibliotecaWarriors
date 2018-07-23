@@ -24,12 +24,18 @@ public class BibliotecaAppTest {
     @Before
     public void setUp(){
         app = new BibliotecaApp();
+
         printStream = new PrintStream(outContent);
         System.setOut(printStream);
+
         library = mock (Library.class);
         testLibrary = app.createDefaultLibrary(printStream);
+
         checkedOutBook = new Book("B3", "The Sound and the Fury", "Faulkner, William", 1923, false);
         testLibrary.addItem(checkedOutBook);
+
+        User testUser = new User("Joe Smith", "was@sad.xon", "123-231-2341", "1234");
+        testLibrary.addUser(testUser);
 
     }
 
@@ -82,6 +88,14 @@ public class BibliotecaAppTest {
 
         app.main(null);
         assertFalse(app.isRunning);
+    }
+
+    @Test
+    public void loginFnTest(){
+        ByteArrayInputStream input = new ByteArrayInputStream("321-7896\n1234\n".getBytes());
+        System.setIn(input);
+
+        assertTrue(app.logIn(testLibrary));
     }
 
 

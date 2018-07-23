@@ -18,6 +18,7 @@ import static org.mockito.Mockito.verify;
 public class LibraryTest {
     private ArrayList<LibraryItem> testCatalog;
     private Library testLibrary;
+    private User testUser;
 
     private Printer printer;
     private PrintStream printStream;
@@ -26,10 +27,13 @@ public class LibraryTest {
     @Before
     public void setUp() {
         testCatalog = new ArrayList<LibraryItem>();
+        testUser = new User("Joe Smith", "was@sad.xon", "123-231-2341", "1234");
+        testUser.setLibraryID("123-1234");
         printStream = mock(PrintStream.class);
         printer = new Printer(printStream);
         bufferedReader = mock(BufferedReader.class);
         testLibrary = new Library(testCatalog, printStream, bufferedReader);
+        testLibrary.addUser(testUser);
         System.setOut(printStream);
     }
     
@@ -193,6 +197,19 @@ public class LibraryTest {
         testLibrary.listItems();
         verify(printStream).println(movieTwo.id + " | " + movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
 
+    }
+
+    @Test
+    public void checkCurrentUser(){
+        assertNull(testLibrary.getCurrentUser());
+        testLibrary.setCurrentUser(testUser.getLibraryID());
+        assertEquals(testUser.getLibraryID(), testLibrary.getCurrentUser());
+    }
+
+    @Test
+    public void checkCredentialTest(){
+        assertEquals(true, testLibrary.checkCredentials(testUser.getLibraryID(), "1234"));
+        assertEquals(false, testLibrary.checkCredentials(testUser.getLibraryID(), "1235"));
     }
 
 }

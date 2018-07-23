@@ -11,12 +11,12 @@ public class UserTest {
     public void setup (){
         testUser = new User("Joe Smith", "was@sad.xon", "123-231-2341", "1234");
 
-
-
     }
     @Test
     public void EmailTest(){
-        assertFalse(testUser.setEmail("was2@dsa.com"));
+        assertTrue(testUser.setEmail("was2@dsa.com"));
+        assertFalse(testUser.setEmail("was2@.com"));
+
 
 
     }
@@ -42,5 +42,7 @@ public class UserTest {
     public void Name(){
         assertNotEquals(testUser.getName(), "Mina Loy");
     }
+
+
 
 }

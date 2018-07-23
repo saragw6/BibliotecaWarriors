@@ -17,6 +17,22 @@ public class Library {
         userList = new ArrayList<>();
     }
 
+    public boolean checkCredentials(String user, String pass){
+        for (User userObj: userList){
+            if (userObj.getLibraryID().equals(user)){
+                if (userObj.checkPassword(pass)) {
+                    printer.printCheckPassword(true);
+                    currentUser = user;
+                    return true;
+                }
+            }
+
+        }
+        printer.printCheckPassword(false);
+        return false;
+
+    }
+
     public String getCurrentUser() {
         return currentUser;
     }

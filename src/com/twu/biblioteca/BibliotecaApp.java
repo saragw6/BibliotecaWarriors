@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class BibliotecaApp {
 
     public static boolean isRunning;
+    public static Printer printer;
 
     public static void main(String[] args) {
 
@@ -17,7 +18,9 @@ public class BibliotecaApp {
         Scanner userInput = new Scanner(System.in);
         PrintStream stream = new PrintStream(System.out);
         Library library = createDefaultLibrary(stream);
+        printer = new Printer(stream);
         isRunning = mainMenu(library, userInput, stream);
+
 
     }
 
@@ -43,12 +46,23 @@ public class BibliotecaApp {
         User userOne = new User("Joe Smith", "was@sad.xon", "123-231-2341", "1234");
         User userTwo = new User("Iona Book", "great@books.com", "321-423-9021", "tolstoy");
 
+        userOne.setLibraryID("321-7896");
+        userTwo.setLibraryID("789-1552");
+
+        library.addUser(userOne);
+        library.addUser(userTwo);
+
         return library;
 
     }
 
     private static boolean mainMenu(Library library, Scanner scan, PrintStream ps){
         Boolean running = true;
+
+        while(!logIn(library)){
+            //Loop for login
+        }
+
         while(running){
             ps.println("What would you like to do?\n\tList Books   List Movies   Checkout   Return   Quit");
             String response = scan.nextLine();
@@ -72,6 +86,16 @@ public class BibliotecaApp {
 
         }
         return running;
+    }
+
+    public static boolean logIn(Library library){
+        Scanner usrInput = new Scanner(System.in);
+        printer.printLoginMsg();
+        String user = usrInput.nextLine();
+        printer.passwordMsg();
+        String pass = usrInput.nextLine();
+        return library.checkCredentials(user, pass);
+
     }
 
     public static void libraryFunctions(Boolean checkOrReturn, Library library, PrintStream ps){

@@ -36,6 +36,14 @@ public class Printer {
          ps.println(invalidMenuOptionMsg);
      }
 
+     public static void  printLoginMsg(){
+        ps.println("Please Enter your Library ID:");
+     }
+
+     public static void passwordMsg(){
+        ps.println("Password: ");
+     }
+
      public static void printCheckoutMsg(boolean success, String item){
          itemType = item;
 
