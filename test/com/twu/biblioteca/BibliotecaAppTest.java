@@ -29,7 +29,7 @@ public class BibliotecaAppTest {
         library = mock (Library.class);
         testLibrary = app.createDefaultLibrary(printStream);
         checkedOutBook = new Book(3, "The Sound and the Fury", "Faulkner, William", 1923, false);
-        testLibrary.addBook(checkedOutBook);
+        testLibrary.addItem(checkedOutBook);
 
     }
 

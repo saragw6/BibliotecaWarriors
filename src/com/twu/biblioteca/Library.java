@@ -14,8 +14,8 @@ public class Library {
         this.printer = new Printer(printStream);
     }
 
-    public void addBook(Book book){
-        catalog.add(book);
+    public void addItem(LibraryItem item){
+        catalog.add(item);
     }
 
     public void listItems(){

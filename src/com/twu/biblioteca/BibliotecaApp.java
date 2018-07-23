@@ -26,13 +26,13 @@ public class BibliotecaApp {
     }
 
     public static Library createDefaultLibrary(PrintStream stream){
-        Library library = new Library(new ArrayList<Book>(), stream, new BufferedReader(new InputStreamReader(System.in)));
+        Library library = new Library(new ArrayList<LibraryItem>(), stream, new BufferedReader(new InputStreamReader(System.in)));
 
-        Book bookTwo = new Book(2, "Modern Romance", "Aziz Ansari", 2015, true);
-        Book bookOne = new Book(1, "Flowers for Algernon", "Daniel Keyes", 1959, true);
+        Book bookTwo = new Book("B2", "Modern Romance", "Aziz Ansari", 2015, true);
+        Book bookOne = new Book("B1", "Flowers for Algernon", "Daniel Keyes", 1959, true);
 
-        library.addBook(bookOne);
-        library.addBook(bookTwo);
+        library.addItem(bookOne);
+        library.addItem(bookTwo);
         return library;
 
     }
