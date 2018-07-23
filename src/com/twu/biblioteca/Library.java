@@ -50,7 +50,7 @@ public class Library {
     public void returnById(String id){
         String itemType = id.startsWith("B") ? "book" : "movie";
         for (LibraryItem item : this.catalog) {
-            if (item.getID().equals(id) && item.isAvailable()) {
+            if (item.getID().equals(id) && !item.isAvailable()) {
                 printer.printReturnMsg(true, itemType);
                 return;
             }

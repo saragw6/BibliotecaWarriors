@@ -21,7 +21,7 @@ public class MovieTest {
     public void createTestMovie(){
         printStream = mock(PrintStream.class);
         bufferedReader = mock(BufferedReader.class);
-        Movie movie = new Movie(1, "Hush", "Mr. Spook", 2008, "5", true);
+        Movie movie = new Movie("M1", "Hush", "Mr. Spook", 2008, "5", true);
         testMovie = movie;
     }
 
@@ -51,11 +51,5 @@ public class MovieTest {
         assertTrue(testMovie.availability);
     }
 
-    @Test
-    public void printDetailsShouldPrintTitleDateAuthorRating() {
-        System.setOut(printStream);
-        testMovie.printDetails();
-        verify(printStream).println("Hush | Mr. Spook | 2008 | 5");
-    }
 
 }

@@ -183,11 +183,6 @@ public class LibraryTest {
         verify(printStream).println("That movie is not available.");
     }
 
-    @Test
-    public void unsuccessfulCheckoutByDoesNotExist() {
-        testLibrary.checkoutById("M1");
-        verify(printStream).println("That movie is not available.");
-    }
 
     @Test
     public void printOnlyAvailMovies() {
@@ -196,7 +191,7 @@ public class LibraryTest {
         Movie movieTwo = new Movie("M2", "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
         testLibrary.addItem(movieTwo);
         testLibrary.listItems();
-        verify(printStream).println(movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
+        verify(printStream).println(movieTwo.id + " | " + movieTwo.title + " | " + movieTwo.creator + " | " + movieTwo.pubDate + " | " + movieTwo.rating);
 
     }
 

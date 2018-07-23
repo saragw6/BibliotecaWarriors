@@ -5,6 +5,8 @@ public class LibraryItem {
     int pubDate;
     boolean availability;
 
+    
+
     public void toggleAvail() {
         availability = !availability;
     }
