@@ -33,6 +33,17 @@ public class Library {
         catalog.add(item);
     }
 
+    public void listItemsByType(String firstLetter){
+        if(catalog.isEmpty()) System.out.print("");
+        else {
+            for(int i = 0; i < catalog.size(); i++){
+                if (catalog.get(i).getID().startsWith(firstLetter) && catalog.get(i).isAvailable()) {
+                    printer.printDetails(catalog.get(i));
+                }
+            }
+        }
+    }
+
     public void listItems(){
         if(catalog.isEmpty()) System.out.print("");
         else {
@@ -52,6 +63,7 @@ public class Library {
         String itemType = id.startsWith("B") ? "book" : "movie";
         for (LibraryItem item : this.catalog) {
             if (item.getID().equals(id) && item.isAvailable()) {
+                item.toggleAvail();
                 printer.printCheckoutMsg(true, itemType);
                 return;
             }
@@ -66,6 +78,7 @@ public class Library {
         String itemType = id.startsWith("B") ? "book" : "movie";
         for (LibraryItem item : this.catalog) {
             if (item.getID().equals(id) && !item.isAvailable()) {
+                item.toggleAvail();
                 printer.printReturnMsg(true, itemType);
                 return;
             }

@@ -34,6 +34,12 @@ public class BibliotecaApp {
         library.addItem(bookOne);
         library.addItem(bookTwo);
 
+        Movie movieOne = new Movie("M1", "Cindarella Story", "Hillary Duff", 2003, "10", true);
+        Movie movieTwo = new Movie("M2", "Total Recall", "Arnold Schwarzneggar", 2015, "3", true);
+
+        library.addItem(movieOne);
+        library.addItem(movieTwo);
+
         User userOne = new User("Joe Smith", "was@sad.xon", "123-231-2341", "1234");
         User userTwo = new User("Iona Book", "great@books.com", "321-423-9021", "tolstoy");
 
@@ -44,10 +50,12 @@ public class BibliotecaApp {
     private static boolean mainMenu(Library library, Scanner scan, PrintStream ps){
         Boolean running = true;
         while(running){
-            ps.println("What would you like to do?\n\tList Books   Checkout   Return   Quit");
+            ps.println("What would you like to do?\n\tList Books   List Movies   Checkout   Return   Quit");
             String response = scan.nextLine();
             if (response.equalsIgnoreCase("list books")){
-                library.listItems();
+                library.listItemsByType("B");
+            } else if (response.equalsIgnoreCase("list movies")) {
+                library.listItemsByType("M");
             }
             else if(response.equalsIgnoreCase("return")){
                 libraryFunctions(false, library, ps);
@@ -68,7 +76,7 @@ public class BibliotecaApp {
 
     public static void libraryFunctions(Boolean checkOrReturn, Library library, PrintStream ps){
         String functionType = (checkOrReturn) ? "checkout:" : "return:" ;
-        ps.println("Type the ID of the book you would like to " + functionType);
+        ps.println("Type the ID of the item you would like to " + functionType);
         Scanner checkScan = new Scanner(System.in);
         try {
             String response = checkScan.nextLine();
