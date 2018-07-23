@@ -16,7 +16,6 @@ public class BibliotecaApp {
 
         Scanner userInput = new Scanner(System.in);
         PrintStream stream = new PrintStream(System.out);
-//        Library library = new Library(new ArrayList<Book>(), stream, new BufferedReader(new InputStreamReader(System.in)));
         Library library = createDefaultLibrary(stream);
         isRunning = mainMenu(library, userInput, stream);
 
@@ -43,7 +42,6 @@ public class BibliotecaApp {
         while(running){
             ps.println("What would you like to do?\n\tList Books   Checkout   Return   Quit");
             String response = scan.nextLine();
-
             if (response.equalsIgnoreCase("list books")){
                 library.listBooks();
             }
@@ -51,7 +49,7 @@ public class BibliotecaApp {
                 ps.println("Return not currently available");
             }
             else if (response.equalsIgnoreCase("checkout")){
-                libraryCheckout(library, ps, scan);
+                libraryCheckout(library, ps);
             }
             else if(response.equalsIgnoreCase("quit")){
                 running = false;
@@ -59,22 +57,23 @@ public class BibliotecaApp {
             else{
                 ps.println("Invalid Menu Option");
             }
+
         }
         return running;
     }
 
-    public static void libraryCheckout(Library library, PrintStream ps, Scanner scanner){
+    public static void libraryCheckout(Library library, PrintStream ps){
         ps.println("Type the ID of the book you would like to checkout:");
+        Scanner checkScan = new Scanner(System.in);
         try {
-            Integer response = scanner.nextInt();
+            Integer response = checkScan.nextInt();
             library.checkoutById(response);
         }
         catch (Exception e){
             ps.println("Not a valid ID");
 
         }
-
-
+        
 
     }
 }

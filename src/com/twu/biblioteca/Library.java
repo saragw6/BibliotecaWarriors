@@ -37,6 +37,7 @@ public class Library {
         for (Book book : this.bookList) {
             if (book.getID() == id && book.isAvailable()) {
                 printer.printCheckoutMsg(true);
+                return;
             }
         }
         printer.printCheckoutMsg(false);
@@ -47,6 +48,7 @@ public class Library {
         for (Book book : this.bookList) {
             if (book.getID() == id && !book.isAvailable()) {
                 printer.printReturnMsg(true);
+                return;
             }
         }
         printer.printReturnMsg(false);

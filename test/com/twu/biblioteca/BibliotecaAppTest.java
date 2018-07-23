@@ -46,7 +46,7 @@ public class BibliotecaAppTest {
         String id = Integer.toString(library.getBookList().get(0).getID());
         ByteArrayInputStream input = new ByteArrayInputStream(id.getBytes());
         System.setIn(input);
-        app.libraryCheckout(library, printStream, new Scanner(System.in));
+        app.libraryCheckout(library, printStream);
         assertEquals("Type the ID of the book you would like to checkout:\nThank you! Enjoy the book.\n", outContent.toString());
 
 
