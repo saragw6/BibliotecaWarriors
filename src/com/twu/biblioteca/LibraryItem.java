@@ -6,8 +6,6 @@ public class LibraryItem {
     boolean availability;
     String ownerID = null;
 
-    
-
     public void toggleAvail() {
         availability = !availability;
     }
